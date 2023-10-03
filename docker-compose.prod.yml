@@ -3,8 +3,10 @@ version: "3.4"
 # Production environment override
 services:
   php:
+    build:
+      context: .
+      target: frankenphp_prod
     environment:
       APP_SECRET: ${APP_SECRET}
-      CLIENT_ID: ${CLIENT_ID}
-      CLIENT_SECRET: ${CLIENT_SECRET}
-      PLAYLIST_ID: ${PLAYLIST_ID}
+      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
