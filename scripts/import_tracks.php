@@ -31,7 +31,7 @@ $options = [
     'additional_types' => 'track',
     'fields' => 'tracks.total'
 ];
-$id = 1;
+$id = 0;
 for ($i = 0; $i < 1000; $i += 100) {
     $limit = 100;
     $offset = $i;
@@ -59,8 +59,8 @@ for ($i = 0; $i < 1000; $i += 100) {
     );
 
     foreach ($tracks as $track) {
-        insertTrack($track, $id);
         $id++;
+        insertTrack($track, $id);
     }
 }
 
