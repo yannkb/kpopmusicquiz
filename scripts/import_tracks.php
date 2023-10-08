@@ -31,7 +31,7 @@ $options = [
     'additional_types' => 'track',
     'fields' => 'tracks.total'
 ];
-
+$id = 1;
 for ($i = 0; $i < 1000; $i += 100) {
     $limit = 100;
     $offset = $i;
@@ -59,7 +59,8 @@ for ($i = 0; $i < 1000; $i += 100) {
     );
 
     foreach ($tracks as $track) {
-        insertTrack($track);
+        insertTrack($track, $id);
+        $id++;
     }
 }
 
@@ -158,16 +159,17 @@ function cleanTrack(string $str)
  * @param Track $track
  * @return int $pdo->lastInsertId()
  */
-function insertTrack(Track $track)
+function insertTrack(Track $track, int $id)
 {
     $pdo = getDbConnection();
 
     if ($pdo === false) return false;
 
-    $sql = 'INSERT INTO track(artist,original_artist,title,original_title,url,image_url)'
-        . ' VALUES(:artist,:original_artist,:title,:original_title,:url,:image_url)';
+    $sql = 'INSERT INTO track(id,artist,original_artist,title,original_title,url,image_url)'
+        . ' VALUES(:id,:artist,:original_artist,:title,:original_title,:url,:image_url)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
+        ':id' => $id,
         ':artist' => $track->getArtist(),
         ':original_artist' => $track->getOriginalArtist(),
         ':title' => $track->getTitle(),
@@ -176,7 +178,7 @@ function insertTrack(Track $track)
         ':image_url' => $track->getImageUrl(),
     ]);
 
-    return $pdo->lastInsertId();
+    return $id;
 }
 
 /**
@@ -187,10 +189,15 @@ function insertTrack(Track $track)
 function getDbConnection(): mixed
 {
     try {
-        $pdo = new \PDO('sqlite:var/data.db');
-    } catch (\PDOException $e) {
-        dump($e->getMessage());
-        return false;
+        $dsn = "pgsql:host=database;port=5432;dbname=app;";
+        // make a database connection
+        $pdo = new PDO($dsn, "app", "!ChangeMe!", [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+        if ($pdo) {
+            echo "Connected to the database successfully!";
+        }
+    } catch (PDOException $e) {
+        dd($e->getMessage());
     }
 
     return $pdo;
