@@ -57,7 +57,7 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
 	npm install
-	npm build
+	npm run build
 fi
 
 exec docker-php-entrypoint "$@"
