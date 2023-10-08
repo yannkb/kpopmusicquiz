@@ -59,8 +59,8 @@ for ($i = 0; $i < 1000; $i += 100) {
     );
 
     foreach ($tracks as $track) {
-        insertTrack($track, $id);
         $id++;
+        insertTrack($track, $id);
     }
 }
 
