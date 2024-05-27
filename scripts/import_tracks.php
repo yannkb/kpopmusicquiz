@@ -12,8 +12,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..', $env);
 $dotenv->safeLoad();
 
 $session = new Session(
-    $_ENV['CLIENT_ID'],
-    $_ENV['CLIENT_SECRET']
+    $_ENV['SPOTIFY_CLIENT_ID'],
+    $_ENV['SPOTIFY_CLIENT_SECRET']
 );
 
 $session->requestCredentialsToken();

@@ -4,9 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    app.client_id: '%env(CLIENT_ID)%'
-    app.client_secret: '%env(CLIENT_SECRET)%'
-    app.playlist_id: '%env(PLAYLIST_ID)%'
+    app.spotify_client_id: '%env(SPOTIFY_CLIENT_ID)%'
+    app.spotify_client_secret: '%env(SPOTIFY_CLIENT_SECRET)%'
+    app.spotify_playlist_id: '%env(SPOTIFY_PLAYLIST_ID)%'
 
 services:
     # default configuration for services in *this* file
