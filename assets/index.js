@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import { checkArtistName, checkTrackName } from './check';
-import { displayScores, saveScores } from './scores';
+import { checkArtistName, checkTrackName } from './check.js';
+import { displayScores, saveScores } from './scores.js';
 import { Buffer } from 'buffer';
 
 $(async function () {
