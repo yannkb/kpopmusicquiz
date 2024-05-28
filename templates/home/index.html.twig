@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <p class="mb-3">
-    <span class="is-size-4" id="track-counter"></span>
-    <span class="is-size-4" id="tracks-length"></span>
-  </p>
-  <form class="mb-3" id="username-form">
-    <div class="field">
-      <input class="input is-large" type="text" name="username" id="username" placeholder="What's your name?">
-    </div>
-	  <button class="button is-primary is-large" id="play-btn">Start!</button>
-  </form>
+	<p class="mb-3">
+		<span class="is-size-4" id="track-counter"></span>
+		<span class="is-size-4" id="tracks-length"></span>
+	</p>
+	<form class="mb-3" id="username-form">
+		<div class="field">
+			<input class="input is-large" type="text" name="username" id="username" placeholder="What's your name?">
+		</div>
+		<button class="button is-primary is-large" id="play-btn">Start!</button>
+	</form>
 	<form class="mb-3" id="guess-form">
-    <div class="field">
-      <input class="input is-large" type="text" name="guess" id="guess" placeholder="Guess the title and/or the artist">
-    </div>
+		<div class="field">
+			<input class="input is-large" type="text" name="guess" id="guess" placeholder="Guess the title and/or the artist">
+		</div>
 	</form>
 	<div class="content">
 		<p class="is-size-3" id="guess-result"></p>
 		<span class="is-size-3" id="answer"></span>
 	</div>
-  <img id="track-image" src="https://picsum.photos/500" width="500" height="500">
+	<img id="track-image" src="https://picsum.photos/500" width="500" height="500">
 {% endblock %}

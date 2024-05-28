@@ -5,38 +5,40 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
-			{% block title %}K-Pop Music Quiz{% endblock %}
+			{% block title %}K-Pop Music Quiz
+			{% endblock %}
 		</title>
-		{% block stylesheets %}
-		{% endblock %}
+		{% block stylesheets %}{% endblock %}
 		{% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
 		{% endblock %}
 	</head>
 
 	<body class="has-background-dark has-text-centered has-text-light">
 
-    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+		<nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
 
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img src="{{ asset('images/logo.png') }}">
-        </a>
-      </div>
+			<div class="navbar-brand">
+				<a class="navbar-item" href="#">
+					<img src="{{ asset('images/logo.png') }}">
+				</a>
+			</div>
 
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+			<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
 
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="{{ path('app_home') }}">Play</a>
-          <a class="navbar-item" href="{{ path('app_score') }}">Scoreboard</a>
-        </div>
-      </div>
-    </nav>
+			<div class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item" href="{{ path('app_home') }}">Play</a>
+					<a class="navbar-item" href="{{ path('app_score') }}">Scoreboard</a>
+				</div>
+			</div>
+		</nav>
 
 		<section class="section">
 
@@ -44,7 +46,7 @@
 				{% for label, messages in app.flashes %}
 					{% for message in messages %}
 						<div class="notification is-{{ label }}">
-              <button class="delete"></button>
+							<button class="delete"></button>
 							{{ message }}
 						</div>
 					{% endfor %}
@@ -57,10 +59,11 @@
 		</section>
 
 		<footer class="footer has-background-dark">
-      <p>
-        Made with &hearts; by <a href="https://twitter.com/Aimaak_">Aimak</a>
-      </p>
-      <a href="https://www.flaticon.com/free-icons/kpop" title="kpop icons">Kpop icons created by Freepik - Flaticon</a>
+			<p>
+				Made with &hearts; by
+				<a href="https://twitter.com/Aimaak_">Aimak</a>
+			</p>
+			<a href="https://www.flaticon.com/free-icons/kpop" title="kpop icons">Kpop icons created by Freepik - Flaticon</a>
 		</footer>
 
 	</body>
