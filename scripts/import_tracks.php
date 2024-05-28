@@ -40,7 +40,7 @@ for ($i = 0; $i < 1000; $i += 100) {
         'limit' => $limit,
         'offset' => $offset
     ];
-    $response = $api->getPlaylistTracks($_ENV['PLAYLIST_ID'], $options);
+    $response = $api->getPlaylistTracks($_ENV['SPOTIFY_PLAYLIST_ID'], $options);
 
     $tracks = array_values(
         array_map(function ($t) {
