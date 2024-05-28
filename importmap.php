@@ -16,9 +16,6 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    'htmx.org' => [
-        'version' => '1.9.12',
-    ],
     'jquery' => [
         'version' => '3.7.1',
     ],

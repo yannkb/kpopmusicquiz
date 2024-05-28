@@ -1,14 +1,4 @@
 <?php return array (
-  'htmx.org' => 
-  array (
-    'version' => '1.9.12',
-    'dependencies' => 
-    array (
-    ),
-    'extraFiles' => 
-    array (
-    ),
-  ),
   'jquery' => 
   array (
     'version' => '3.7.1',
@@ -64,6 +54,16 @@
   'ieee754' => 
   array (
     'version' => '1.2.1',
+    'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  'htmx.org' => 
+  array (
+    'version' => '1.9.12',
     'dependencies' => 
     array (
     ),
