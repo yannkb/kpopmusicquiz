@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form action="{{ path('app_login') }}" method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -18,13 +18,13 @@
     <div class="field">
       <label for="inputUsername">Username</label>
       <div class="control">
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input" autocomplete="username" required autofocus>
+        <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="input" autocomplete="username" required autofocus>
       </div>
     </div>
     <div class="field">
       <label for="inputPassword">Password</label>
       <div class="control">
-        <input type="password" name="password" id="inputPassword" class="input" autocomplete="current-password" required>
+        <input type="password" name="_password" id="inputPassword" class="input" autocomplete="current-password" required>
       </div>
     </div>
 
