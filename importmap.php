@@ -16,22 +16,4 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    'jquery' => [
-        'version' => '3.7.1',
-    ],
-    'diacritics' => [
-        'version' => '1.3.0',
-    ],
-    'fuzzyset' => [
-        'version' => '1.0.7',
-    ],
-    'buffer' => [
-        'version' => '6.0.3',
-    ],
-    'base64-js' => [
-        'version' => '1.5.1',
-    ],
-    'ieee754' => [
-        'version' => '1.2.1',
-    ],
 ];
