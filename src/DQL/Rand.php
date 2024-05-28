@@ -8,7 +8,7 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
 
-class Random extends FunctionNode
+class Rand extends FunctionNode
 {
     /** @var SimpleArithmeticExpression */
     private $expression = null;
@@ -16,10 +16,10 @@ class Random extends FunctionNode
     public function getSql(SqlWalker $sqlWalker): string
     {
         if ($this->expression) {
-            return 'RANDOM(' . $this->expression->dispatch($sqlWalker) . ')';
+            return 'RAND(' . $this->expression->dispatch($sqlWalker) . ')';
         }
 
-        return 'RANDOM()';
+        return 'RAND()';
     }
 
     public function parse(Parser $parser): void

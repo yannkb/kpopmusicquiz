@@ -24,3 +24,4 @@
 - ❌ Add skip button when artist and title are found
 - ❌ Add "is playing" icon
 - ❌ Add multiplayer (ReactPHP ? / unique session id created by a player, input to join with session id)
+- ❌ Update logo and favicon

@@ -43,7 +43,7 @@ class TrackRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->setMaxResults($limit)
-            ->orderBy('RANDOM()')
+            ->orderBy('RAND()')
             ->getQuery()
             ->getResult();
     }
