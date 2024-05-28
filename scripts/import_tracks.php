@@ -27,6 +27,8 @@ if (!is_string($accessToken)) {
 $api = new SpotifyWebAPI();
 $api->setAccessToken($accessToken);
 
+$pdo = getDbConnection();
+
 $options = [
     'additional_types' => 'track',
     'fields' => 'tracks.total'
@@ -60,7 +62,7 @@ for ($i = 0; $i < 1000; $i += 100) {
 
     foreach ($tracks as $track) {
         $id++;
-        insertTrack($track, $id);
+        insertTrack($pdo, $track, $id);
     }
 }
 
@@ -159,10 +161,8 @@ function cleanTrack(string $str)
  * @param Track $track
  * @return int $pdo->lastInsertId()
  */
-function insertTrack(Track $track, int $id)
+function insertTrack($pdo, Track $track, int $id)
 {
-    $pdo = getDbConnection();
-
     if ($pdo === false) return false;
 
     $sql = 'INSERT INTO track(id,artist,original_artist,title,original_title,url,image_url)'
@@ -194,7 +194,7 @@ function getDbConnection(): mixed
         $pdo = new PDO($dsn, "app", "!ChangeMe!", [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
         if ($pdo) {
-            echo "Connected to the database successfully!";
+            echo "Connected to the database successfully!" . PHP_EOL;
         }
     } catch (PDOException $e) {
         dd($e->getMessage());
