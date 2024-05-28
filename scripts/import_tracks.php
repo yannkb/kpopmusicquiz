@@ -189,7 +189,7 @@ function insertTrack($pdo, Track $track, int $id)
 function getDbConnection(): mixed
 {
     try {
-        $dsn = "pgsql:host=database;port=5432;dbname=app;";
+        $dsn = "mysql:host=database;port=3306;dbname=app;";
         // make a database connection
         $pdo = new PDO($dsn, "app", "!ChangeMe!", [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
