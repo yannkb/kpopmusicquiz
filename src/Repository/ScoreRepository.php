@@ -45,7 +45,7 @@ class ScoreRepository extends ServiceEntityRepository
      *
      * @return Score $score
      */
-    public function findOneExistingScore($player, $numberOfTracks): ?Score
+    public function findOneExistingScore($player, $numberOfTracks): Score
     {
         return $this->createQueryBuilder('s')
             ->andWhere('LOWER(s.player) = :player')
