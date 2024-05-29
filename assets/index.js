@@ -30,7 +30,7 @@ $(async function () {
     });
   let username;
   let usernameInput = document.getElementById('username');
-  usernameInput.onkeypress = clsAlphaNoOnly;
+  usernameInput.keydown = clsAlphaNoOnly;
   let buf = new Buffer.from(tracks, 'base64');
   tracks = JSON.parse(buf.toString('utf-8'));
   const tracksLength = tracks.length;
