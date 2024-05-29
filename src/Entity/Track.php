@@ -31,7 +31,7 @@ class Track
     #[ORM\Column(length: 255)]
     private ?string $image_url = null;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     private ?string $spotifyId = null;
 
     public function getId(): ?int

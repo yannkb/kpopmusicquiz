@@ -31,6 +31,7 @@ class ImportTracksCommand extends Command
     {
         $progressBar = new ProgressBar($output, 100);
         $progressBar->start();
+        $output->writeln('');
 
         $session = new Session(
             $this->params->get('app.spotify_client_id'),
@@ -77,6 +78,11 @@ class ImportTracksCommand extends Command
             );
 
             foreach ($tracks as $track) {
+                $existingTrack = $this->trackRepository->findOneBy(['spotifyId' => $track->getSpotifyId()]);
+                if ($existingTrack instanceof Track) {
+                    $output->writeln('Duplicate found, skipping track');
+                    continue;
+                }
                 $this->trackRepository->save($track, true);
                 $progressBar->advance();
             }
