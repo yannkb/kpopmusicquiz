@@ -31,6 +31,9 @@ class Track
     #[ORM\Column(length: 255)]
     private ?string $image_url = null;
 
+    #[ORM\Column]
+    private ?string $spotifyId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Track
     public function setImageUrl(string $image_url): self
     {
         $this->image_url = $image_url;
+
+        return $this;
+    }
+
+    public function getSpotifyId(): ?string
+    {
+        return $this->spotifyId;
+    }
+
+    public function setSpotifyId(string $spotifyId): self
+    {
+        $this->spotifyId = $spotifyId;
 
         return $this;
     }

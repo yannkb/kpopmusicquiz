@@ -15,30 +15,32 @@
 				{{ app.user.userIdentifier }},
 				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
+		{% else %}
+			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<div class="field">
+				<label class="label" for="inputUsername">Username</label>
+				<div class="control">
+					<input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="input" autocomplete="username" required autofocus>
+				</div>
+			</div>
+			<div class="field">
+				<label class="label" for="inputPassword">Password</label>
+				<div class="control">
+					<input type="password" name="_password" id="inputPassword" class="input" autocomplete="current-password" required>
+				</div>
+			</div>
+
+			<input
+			type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			{# If you want to control the URL the user is redirected to on success #}
+			<input type="hidden" name="_target_path" value="/admin">
+
+			<div class="field is-grouped is-grouped-centered">
+				<button class="button is-primary" type="submit">
+					Sign in
+				</button>
+			</div>
 		{% endif %}
-
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<div class="field">
-			<label class="label" for="inputUsername">Username</label>
-			<div class="control">
-				<input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="input" autocomplete="username" required autofocus>
-			</div>
-		</div>
-		<div class="field">
-			<label class="label" for="inputPassword">Password</label>
-			<div class="control">
-				<input type="password" name="_password" id="inputPassword" class="input" autocomplete="current-password" required>
-			</div>
-		</div>
-
-		<input
-		type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		{# If you want to control the URL the user is redirected to on success #}
-		<input type="hidden" name="_target_path" value="/admin">
-
-		<button class="button is-primary" type="submit">
-			Sign in
-		</button>
 	</form>
 {% endblock %}
