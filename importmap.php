@@ -34,4 +34,7 @@ return [
     'jquery' => [
         'version' => '3.7.1',
     ],
+    'htmx.org' => [
+        'version' => '1.9.12',
+    ],
 ];
