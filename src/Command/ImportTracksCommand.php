@@ -8,6 +8,7 @@ use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
@@ -28,11 +29,8 @@ class ImportTracksCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln([
-            'Import Tracks Command',
-            '=====================',
-            '',
-        ]);
+        $progressBar = new ProgressBar($output, 100);
+        $progressBar->start();
 
         $session = new Session(
             $this->params->get('app.spotify_client_id'),
@@ -43,8 +41,8 @@ class ImportTracksCommand extends Command
         $accessToken = $session->getAccessToken();
 
         if (!is_string($accessToken)) {
-            dump('failed to authenticate to Spotify API');
-            return false;
+            $output->writeln('Failed to authenticate to Spotify API, check your credentials.');
+            return Command::FAILURE;
         }
 
         $api = new SpotifyWebAPI();
@@ -80,9 +78,13 @@ class ImportTracksCommand extends Command
 
             foreach ($tracks as $track) {
                 $this->trackRepository->save($track, true);
+                $progressBar->advance();
             }
         }
 
+        $progressBar->finish();
+        $output->writeln('');
+        $output->writeln('Playlist imported successfully!');
         return Command::SUCCESS;
     }
 
