@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>
-			{% block title %}K-Pop Music Quiz
+			{% block title %}K-pop Music Quiz
 			{% endblock %}
 		</title>
 		{% block stylesheets %}{% endblock %}
@@ -13,12 +13,31 @@
 			{% block importmap %}
 				{{ importmap('app') }}
 			{% endblock %}
+			<script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
 		{% endblock %}
 	</head>
 	<body>
+		<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="{{ path('app_welcome') }}">
+					<strong>K-pop Music Quiz</strong>
+				</a>
+			</div>
+			<div class="navbar-menu">
+				<div class="navbar-end">
+					<a class="navbar-item" href="#">Home</a>
+					<a class="navbar-item" href="#">How to Play</a>
+					<a class="navbar-item" href="#">Leaderboard</a>
+					<a class="navbar-item" href="#">Contact</a>
+				</div>
+			</div>
+		</nav>
 		{% block body %}{% endblock %}
-		<footer>
-			<a href="https://www.flaticon.com/free-icons/kpop" title="kpop icons">Kpop icons created by Freepik - Flaticon</a>
+		<footer class="footer">
+			<div class="content has-text-centered">
+				<a href="https://www.flaticon.com/free-icons/kpop" title="kpop icons">Kpop icons created by Freepik - Flaticon</a>
+				<p>© 2024 K-pop Music Quiz. All rights reserved.</p>
+			</div>
 		</footer>
 	</body>
 </html>
