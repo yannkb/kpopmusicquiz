@@ -16,16 +16,27 @@
 		{% endblock %}
 	</head>
 	<body>
-		<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+		<nav class="navbar" role="navigation" aria-label="main navigation">
 			<div class="navbar-brand">
 				<a class="navbar-item" href="{{ path('app_welcome') }}">
+					<img src="{{ asset('favicon.ico') }}" alt="K-pop Music Quiz logo" class="pr-1">
 					<strong>K-pop Music Quiz</strong>
 				</a>
+				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
 			</div>
-			<div class="navbar-menu">
-				<div class="navbar-end">
-					<a class="navbar-item" href="#">Home</a>
-					<a class="navbar-item" href="#">Leaderboard</a>
+			<div id="navMenu" class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item">
+						Home
+					</a>
+					<a class="navbar-item">
+						Leaderboard
+					</a>
 				</div>
 			</div>
 		</nav>
