@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 use SpotifyWebAPI\SpotifyWebAPI;
@@ -24,34 +25,45 @@ class SpotifyService
         $offset = 0;
         $limit = 100;
         $totalProcessed = 0;
+        $hasMoreTracks = true;
 
-        do {
+        while ($hasMoreTracks) {
             try {
                 $playlistTracks = $this->spotify->getPlaylistTracks($playlistId, [
                     'offset' => $offset,
                     'limit' => $limit,
-                    'fields' => 'items(track(id,name,artists,preview_url)),next'
+                    'fields' => 'items(track(id,name,artists(name),preview_url,album(images)),total'
                 ]);
-    
+
+                if (!isset($playlistTracks->items) || empty($playlistTracks->items)) {
+                    $hasMoreTracks = false;
+                    continue;
+                }
+
                 foreach ($playlistTracks->items as $item) {
                     if (isset($item->track)) {
                         $this->processTrack($item->track);
                         $totalProcessed++;
                     }
                 }
-    
+
                 $this->em->flush();
-    
-                $totalProcessed += count($playlistTracks->items);
-    
+
+                echo "Processed $totalProcessed tracks so far.\n";
+
                 $offset += $limit;
+
+                // Check if we've processed all tracks
+                if (count($playlistTracks->items) < $limit) {
+                    $hasMoreTracks = false;
+                }
             } catch (\Exception $e) {
                 echo "Error processing tracks: " . $e->getMessage() . "\n";
                 // Optionally, you might want to break the loop here or continue to the next batch
             }
-        } while ($playlistTracks->next);
+        }
 
-        echo "Finished processing all tracks.\n";
+        echo "Finished processing all tracks. Total processed: $totalProcessed\n";
     }
 
     private function processTrack($track)
@@ -74,6 +86,7 @@ class SpotifyService
         $song->setTitle($track->name);
         $song->setArtist($track->artists[0]->name);
         $song->setPreviewUrl($track->preview_url);
+        $song->setImageUrl($track->album->images[0]->url);
 
         $this->em->persist($song);
     }
