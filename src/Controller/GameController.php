@@ -6,11 +6,11 @@ use App\Entity\Game;
 use App\Entity\Song;
 use App\Form\GameType;
 use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Uid\Uuid;
 
 #[Route('/game', name: 'app_game_')]
 class GameController extends AbstractController
@@ -19,7 +19,7 @@ class GameController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $game = new Game();
-        $game->setUuid(Uuid::uuid4());
+        $game->setUuid(Uuid::v4());
         $game->setCreatedAt(new \DateTimeImmutable());
         $form = $this->createForm(GameType::class, $game);
 
