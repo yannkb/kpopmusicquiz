@@ -7,6 +7,7 @@ use App\Entity\Song;
 use App\Form\GameType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -47,10 +48,15 @@ class GameController extends AbstractController
                 'No game found for uuid ' . $uuid
             );
         }
-        $songs = $entityManager->getRepository(Song::class)->findRandom($game->getNumberOfTracks());
 
-        return $this->render('game/play.html.twig', [
-            'songs' => $songs
-        ]);
+        return $this->render('game/play.html.twig');
+    }
+
+    #[Route('/song', name: 'get_song')]
+    public function getSong(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $song = $entityManager->getRepository(Song::class)->findOneRandom();
+
+        return $this->json($song);
     }
 }
