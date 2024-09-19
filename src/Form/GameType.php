@@ -22,7 +22,7 @@ class GameType extends AbstractType
                     '20' => 20,
                 ],
             ])
-            ->add('start', SubmitType::class)
+            ->add('play', SubmitType::class)
         ;
     }
 
