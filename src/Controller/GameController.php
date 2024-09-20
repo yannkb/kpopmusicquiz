@@ -13,10 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Uid\Uuid;
 
-#[Route('/game', name: 'app_game_')]
 class GameController extends AbstractController
 {
-    #[Route('/', name: 'new')]
+    #[Route('/game/new', name: 'app_game_new')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $game = new Game();
@@ -39,7 +38,7 @@ class GameController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}', name: 'start')]
+    #[Route('/{uuid}', name: 'app_game_start')]
     public function startGame(EntityManagerInterface $entityManager, string $uuid): Response
     {
         $game = $entityManager->getRepository(Game::class)->findOneBy(['uuid' => $uuid]);
@@ -52,10 +51,23 @@ class GameController extends AbstractController
         return $this->render('game/play.html.twig');
     }
 
-    #[Route('/song', name: 'get_song')]
+    #[Route('/game/song', name: 'app_game_get_song')]
     public function getSong(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
-        $song = $entityManager->getRepository(Song::class)->findOneRandom();
+        $session = $request->getSession();
+
+        $excludedSongsIds = $session->get('excludedSongsIds');
+
+        $song = $entityManager->getRepository(Song::class)->findOneRandom($excludedSongsIds);
+        if (!$song) {
+            throw $this->createNotFoundException(
+                'No song found'
+            );
+        }
+
+        $excludedSongsIds[] = $song->getId();
+
+        $session->set('excludedSongsIds', $excludedSongsIds);
 
         return $this->json($song);
     }
