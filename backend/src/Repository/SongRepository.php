@@ -17,28 +17,20 @@ class SongRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return array Returns a Song object
+     * @return array Returns an array of Song objects
      */
-    public function findOneRandom(array $excludedSongsIds = []): array
+    public function findRandom(int $size = 10): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             SELECT * FROM song s
-            ';
-        if (!empty($excludedSongsIds)) {
-            $sql .= '
-            WHERE id NOT IN (:excludedSongsIds)
-        ';
-        }
-        $sql .= '
             ORDER BY RANDOM()
-            LIMIT 1 OFFSET (SELECT ABS(RANDOM()) % (SELECT COUNT(*) FROM song))
-            ';
+            LIMIT :size';
 
-        $resultSet = $conn->executeQuery($sql, ['excludedSongsIds' => $excludedSongsIds]);
+        $resultSet = $conn->executeQuery($sql, ['size' => $size]);
 
-        return $resultSet->fetchAssociative();
+        return $resultSet->fetchAllAssociative();
     }
 
     //    public function findOneBySomeField($value): ?Song
